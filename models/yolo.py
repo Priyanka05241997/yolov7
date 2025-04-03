@@ -49,7 +49,7 @@ class Detect(nn.Module):
             x[i] = x[i].view(bs, self.na, self.no, ny, nx).permute(0, 1, 3, 4, 2).contiguous()
 
             if not self.training:  # inference
-                if self.grid[i].shape[2:4] != x[i].shape[2:4]:
+                if self.grid[i].shape[2:4] != list(x[i].shape[2:4]):
                     self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
                 y = x[i].sigmoid()
                 if not torch.onnx.is_in_onnx_export():
@@ -127,7 +127,7 @@ class IDetect(nn.Module):
             x[i] = x[i].view(bs, self.na, self.no, ny, nx).permute(0, 1, 3, 4, 2).contiguous()
 
             if not self.training:  # inference
-                if self.grid[i].shape[2:4] != x[i].shape[2:4]:
+                if self.grid[i].shape[2:4] != list(x[i].shape[2:4]):
                     self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
 
                 y = x[i].sigmoid()
@@ -147,7 +147,7 @@ class IDetect(nn.Module):
             x[i] = x[i].view(bs, self.na, self.no, ny, nx).permute(0, 1, 3, 4, 2).contiguous()
 
             if not self.training:  # inference
-                if self.grid[i].shape[2:4] != x[i].shape[2:4]:
+                if self.grid[i].shape[2:4] != list(x[i].shape[2:4]):
                     self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
 
                 y = x[i].sigmoid()
@@ -261,7 +261,7 @@ class IKeypoint(nn.Module):
             x_kpt = x[i][..., 6:]
 
             if not self.training:  # inference
-                if self.grid[i].shape[2:4] != x[i].shape[2:4]:
+                if self.grid[i].shape[2:4] != list(x[i].shape[2:4]):
                     self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
                 kpt_grid_x = self.grid[i][..., 0:1]
                 kpt_grid_y = self.grid[i][..., 1:2]
@@ -345,7 +345,7 @@ class IAuxDetect(nn.Module):
             x[i+self.nl] = x[i+self.nl].view(bs, self.na, self.no, ny, nx).permute(0, 1, 3, 4, 2).contiguous()
 
             if not self.training:  # inference
-                if self.grid[i].shape[2:4] != x[i].shape[2:4]:
+                if self.grid[i].shape[2:4] != list(x[i].shape[2:4]):
                     self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
 
                 y = x[i].sigmoid()
@@ -371,7 +371,7 @@ class IAuxDetect(nn.Module):
             x[i] = x[i].view(bs, self.na, self.no, ny, nx).permute(0, 1, 3, 4, 2).contiguous()
 
             if not self.training:  # inference
-                if self.grid[i].shape[2:4] != x[i].shape[2:4]:
+                if self.grid[i].shape[2:4] != list(x[i].shape[2:4]):
                     self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
 
                 y = x[i].sigmoid()
@@ -474,7 +474,7 @@ class IBin(nn.Module):
             x[i] = x[i].view(bs, self.na, self.no, ny, nx).permute(0, 1, 3, 4, 2).contiguous()
 
             if not self.training:  # inference
-                if self.grid[i].shape[2:4] != x[i].shape[2:4]:
+                if self.grid[i].shape[2:4] != list(x[i].shape[2:4]):
                     self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
 
                 y = x[i].sigmoid()
